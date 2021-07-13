@@ -1,17 +1,14 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const routes = require('./routes');
 
 const port = process.env.PORT || 8080;
 
 const app = express();
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 const apiRoutes = express.Router();
-apiRoutes.post('/api/users', routes.createUsers);
-apiRoutes.post('/api/login', routes.login);
+apiRoutes.post('/api/users', routes.createUser);
+apiRoutes.post('/api/login', routes.findUser);
 
 app.use(apiRoutes);
 

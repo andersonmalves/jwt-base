@@ -1,15 +1,15 @@
-const User = require('../models/user');
+const { userModel } = require('../models');
 
-module.exports = async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+const findUser = async (req, res) => {
+  try {
+    const { username } = req.body;
+    const result = await userModel.findUser(username);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: 'Não foi possível localizar o usuário.' });
+  }
+}
 
-  if (!username || !password) return res.send(401);
-
-  const model = new User();
-  
-  const user = await model.findUserByName(username);
-
-  if (!user) return res.status(401).json(false);
-
+module.exports = {
+  findUser
 };

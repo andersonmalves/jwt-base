@@ -8,7 +8,7 @@ app.use(express.json());
 
 const apiRoutes = express.Router();
 apiRoutes.post('/api/users', routes.createUser);
-apiRoutes.post('/api/login', routes.findUser);
+apiRoutes.post('/api/login', routes.userLogin);
 
 app.use(apiRoutes);
 

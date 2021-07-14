@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = require('./routes');
+const validateJWT = require('./auth/validateJWT')
 
 const port = process.env.PORT || 8080;
 
@@ -9,6 +10,7 @@ app.use(express.json());
 const apiRoutes = express.Router();
 apiRoutes.post('/api/users', routes.createUser);
 apiRoutes.post('/api/login', routes.userLogin);
+apiRoutes.post('/api/products', validateJWT, routes.createProduct); //
 
 app.use(apiRoutes);
 
